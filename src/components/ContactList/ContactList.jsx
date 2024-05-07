@@ -1,0 +1,1 @@
+const ContactList = ({ contacts, onDelete }) => {};
