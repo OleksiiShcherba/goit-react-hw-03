@@ -1,6 +1,8 @@
 import "./App.css";
 import "modern-normalize";
 
+import { useState } from "react";
+
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
@@ -13,12 +15,25 @@ const phoneList = [
 ];
 
 function App() {
+  const [search, setSearch] = useState("");
+
+  const getFiltratedList = () => {
+    const searchableLine = search?.toLowerCase();
+    if (searchableLine) {
+      return phoneList.filter((contact) => {
+        return contact?.name.toLowerCase().includes(searchableLine);
+      });
+    } else {
+      return phoneList;
+    }
+  };
+
   return (
     <>
       <h1>Phonebook</h1>
       <ContactForm />
-      <SearchBox />
-      <ContactList contacts={phoneList} />
+      <SearchBox searchField={search} searchChange={setSearch} />
+      <ContactList contacts={getFiltratedList()} />
     </>
   );
 }
