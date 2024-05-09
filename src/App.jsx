@@ -15,23 +15,30 @@ const phoneList = [
 ];
 
 function App() {
+  const [contacts, setContacts] = useState(phoneList);
   const [search, setSearch] = useState("");
 
   const getFiltratedList = () => {
     const searchableLine = search?.toLowerCase();
     if (searchableLine) {
-      return phoneList.filter((contact) => {
+      return contacts.filter((contact) => {
         return contact?.name.toLowerCase().includes(searchableLine);
       });
     } else {
-      return phoneList;
+      return contacts;
     }
+  };
+
+  const addNewContact = (contact) => {
+    setContacts((contacts) => {
+      return [...contacts, contact];
+    });
   };
 
   return (
     <>
       <h1>Phonebook</h1>
-      <ContactForm />
+      <ContactForm addNewContact={addNewContact} />
       <SearchBox searchField={search} searchChange={setSearch} />
       <ContactList contacts={getFiltratedList()} />
     </>
