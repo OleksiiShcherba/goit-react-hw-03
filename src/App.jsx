@@ -35,12 +35,18 @@ function App() {
     });
   };
 
+  const deleteContact = (id) => {
+    setContacts((contacts) => {
+      return contacts.filter((contact) => contact.id !== id);
+    });
+  };
+
   return (
     <>
       <h1>Phonebook</h1>
       <ContactForm addNewContact={addNewContact} />
       <SearchBox searchField={search} searchChange={setSearch} />
-      <ContactList contacts={getFiltratedList()} />
+      <ContactList contacts={getFiltratedList()} onDelete={deleteContact} />
     </>
   );
 }

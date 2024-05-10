@@ -1,14 +1,14 @@
 import propsTypes from "prop-types";
 import css from "./Contact.module.css";
 
-const Contact = ({ name, phone, onDelete }) => {
+const Contact = ({ id, name, phone, onDelete }) => {
   return (
     <li className={css.contactElement}>
       <ul className={css.dataList}>
         <li className={css.name}>{name}</li>
         <li className={css.phone}>{phone}</li>
       </ul>
-      <button className={css.deleteAction} onClick={onDelete}>
+      <button className={css.deleteAction} onClick={() => onDelete(id)}>
         Delete
       </button>
     </li>
